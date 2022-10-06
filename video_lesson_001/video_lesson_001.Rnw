@@ -1,0 +1,23 @@
+\documentclass{article}
+
+\begin{document}
+<<>>=
+# Load required libraries
+library(ggplot2)
+# Set seed for reproducibility
+set.seed(1298)
+# Load the data
+data <- data.frame( x = 1:300,
+                    y = rnorm( 300 ),
+                    group = c( rep( "A" , 100 ),
+                               rep( "B" , 100 ),
+                               rep( "C" , 100 ) ) )
+# Create a plot
+ggp <- ggplot( data , aes( x = x , y = y , col = group ) ) + 
+  geom_line() + 
+  theme( legend.position = "bottom" ) + 
+  theme( legend.spacing.x = unit( 1.0 , "cm" ) )
+# Show the plot
+ggp
+@
+\end{document}
