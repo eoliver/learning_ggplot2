@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\begin{document}
+
+% Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
+
+<<setup-options,echo=FALSE,eval=TRUE>>=
+knitr::opts_chunk$set(
+  size = "normalsize",
+  eval = TRUE,
+  echo = TRUE,
+  results = "markup",
+  comment = "",
+  fig.width = 5,
+  fig.height = 3,
+  fig.align = "center"
+  )
+@
+
+<<>>=
+# Load required libraries
+library(ggplot2)
+# Setting the seed for reproducible random numbers
+set.seed(1510)
+# Data loading
+data <- data.frame(my_dates = seq(as.Date(0, origin = "2015-01-01"),
+                                  length = 72,
+                                  by = "1 month"),
+                   my_values = sample(1:100, 72, replace = TRUE))
+
+dates_vline <- as.Date(c("2015-11-01","2018-03-01"))
+dates_vline <- which(data$my_dates %in% dates_vline)
+# Create a plot
+ggp <- ggplot(data, aes(my_dates, my_values)) + 
+  geom_line() + 
+  geom_vline(xintercept = as.numeric(data$my_dates[dates_vline]),
+             col = "purple", lwd = 1)
+# Show the plot
+ggp
+@
+\end{document}
