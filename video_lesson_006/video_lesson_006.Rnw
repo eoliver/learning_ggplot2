@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\begin{document}
+
+% Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
+
+<<setup-options,echo=FALSE,eval=TRUE>>=
+knitr::opts_chunk$set(
+  size = "normalsize",
+  eval = TRUE,
+  echo = TRUE,
+  results = "markup",
+  comment = "",
+  fig.width = 5,
+  fig.height = 3,
+  fig.align = "center"
+  )
+@
+
+<<>>=
+# Load required libraries
+library(ggplot2)
+# Data loading
+data <- data.frame(x = 1:10,
+                   y = 1:10)
+# Create a plot
+ggp <- ggplot(data, aes(x, y)) + 
+  geom_point() +
+  labs(title = "My Title",
+       subtitle = "My Subtitle") + 
+  theme(plot.title = element_text(size = 20),
+        plot.subtitle = element_text(size = 10)) + 
+  theme(plot.title = element_text(color = "#9999CC"),
+        plot.subtitle = element_text(color = "#66CC99"))
+# Show the plot
+ggp
+@
+\end{document}
