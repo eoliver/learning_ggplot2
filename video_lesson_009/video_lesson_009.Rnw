@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\begin{document}
+% Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
+
+<<setup-options,echo=FALSE,eval=TRUE>>=
+knitr::opts_chunk$set(
+  size = "normalsize",
+  eval = TRUE,
+  echo = TRUE,
+  results = "markup",
+  comment = "",
+  fig.width = 5,
+  fig.height = 3,
+  fig.align = "center"
+  )
+@
+\Sexpr{Sys.time()}
+<<>>=
+# Load required libraries
+library(ggplot2)
+# Create a plot
+ggp <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + 
+  geom_point() + 
+  theme(axis.text.x = element_blank(), 
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+# Show the plot
+ggp
+@
+\end{document}
