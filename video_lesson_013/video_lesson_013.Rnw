@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\begin{document}
+
+% Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
+
+<<setup-options,echo=FALSE,eval=TRUE>>=
+knitr::opts_chunk$set(
+  size = "normalsize",
+  eval = TRUE,
+  echo = TRUE,
+  results = "markup",
+  comment = "",
+  fig.width = 5,
+  fig.height = 3,
+  fig.align = "center"
+  )
+@
+\Sexpr{Sys.time()}
+<<>>=
+# Load required libraries
+library(ggplot2)
+library(gridExtra)
+# Setting the seed for reproducible random numbers
+set.seed(963, kind = "Mersenne-Twister")
+# Load the data
+data <- data.frame(x = rnorm(100),
+                   y = rnorm(100))
+# Create a plot
+ggp <- ggplot(data, aes(x, y)) + 
+  geom_point()
+# Show the plot 1
+ggp
+# Show the plot 2
+grid.arrange(ggp,
+             arrangeGrob(ggp, ggp, ggp,
+                           heights = c(0.3, 0.3, 0.4)),
+               ncol = 2)
+
+@
+\end{document}
