@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\begin{document}
+
+% Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
+
+<<setup-options,echo=FALSE,eval=TRUE>>=
+knitr::opts_chunk$set(
+  size = "normalsize",
+  eval = TRUE,
+  echo = TRUE,
+  results = "markup",
+  comment = "",
+  fig.width = 6,
+  fig.height = 6,
+  fig.align = "center"
+  )
+@
+\Sexpr{Sys.time()}
+<<>>=
+# Load required libraries
+library(ggplot2)
+# Setting the seed for reproducible random numbers
+set.seed(8642, kind = "Mersenne-Twister")
+# Load the data
+x <- rnorm(1000)
+y <- runif(1000)
+z <- rpois(1000, 3)
+data <- data.frame(values = c(x, y, z),
+                   group = c(rep("x", 1000),
+                             rep("y", 1000),
+                             rep("z", 1000)))
+head(data)
+# Create a plot
+boxplot(x)
+boxplot(values ~ group, data)
+boxplot(values ~ group, data,
+        main = "My boxplots",
+        xlab = "My boxplot groups",
+        ylab = "The values of my boxplots")
+boxplot(values ~ group, data,
+        horizontal = TRUE)
+boxplot(values ~ group, data,
+        notch = TRUE)
+boxplot(values ~ group, data,
+        col = "red")
+boxplot(values ~ group, data,
+        col = c("red","green","purple"))
+data2 <- data
+data2$group <- c(rep("x1", 500), rep("x2", 500),
+                 rep("y1", 500), rep("y2", 500),
+                 rep("z1", 500), rep("z2", 500))
+boxplot(values ~ group, data2,
+        col = c("blue", "pink"),
+        at = c(1, 2, 5, 6, 9, 10))
+ggp <- ggplot(data2, aes(x = group, y = values, fill = group)) + 
+  geom_boxplot()
+ggp
+@
+\end{document}
